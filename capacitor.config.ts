@@ -1,8 +1,3 @@
-/// <reference types="@capawesome/capacitor-android-edge-to-edge-support" />
-/// <reference types="@capacitor/status-bar" />
-// Configuração final para build no iOS
-
-
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
@@ -10,26 +5,26 @@ const config: CapacitorConfig = {
   appName: 'titanapp',
   webDir: 'www',
   server: {
-    url: 'https://inteligenciatitan.com.br',
-    cleartext: true,
-    errorPath: 'offline.html', // fallback quando offline
+    url: 'https://inteligenciatitan.com.br', // seu servidor remoto
+    cleartext: true
+    // REMOVIDO errorPath pois fallback offline será pelo AppDelegate
   },
   android: {
     adjustMarginsForEdgeToEdge: 'force',
   },
   plugins: {
     StatusBar: {
-      overlaysWebView: true, // webview sobrepõe barra de status
-      style: 'LIGHT', // ícones brancos
+      overlaysWebView: true,
+      style: 'LIGHT',
       backgroundColor: '#000000',
     },
     EdgeToEdge: {
       backgroundColor: '#000000',
     },
     SplashScreen: {
-      launchShowDuration: 0,       // não precisa mostrar por tempo fixo
-      launchAutoHide: false,       // esconder manualmente
-      backgroundColor: '#101212',  // mesmo fundo do offline
+      launchShowDuration: 0,
+      launchAutoHide: false,
+      backgroundColor: '#101212',
       androidSplashResourceName: 'splash',
       androidScaleType: 'CENTER_CROP',
       showSpinner: false,

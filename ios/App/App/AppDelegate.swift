@@ -31,24 +31,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WKNavigationDelegate {
         return ApplicationDelegateProxy.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
     }
 
-    // --- FUNÇÃO MODIFICADA COM LÓGICA DE DEBUG ---
+    // --- FALLBACK OFFLINE ---
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         let nsError = error as NSError
         if nsError.code == NSURLErrorNotConnectedToInternet || nsError.code == NSURLErrorTimedOut || nsError.code == NSURLErrorCannotConnectToHost {
-            
-            // Tenta carregar o arquivo de teste
-            if let errorUrl = Bundle.main.url(forResource: "public/offline-test", withExtension: "html") {
-                // Se ENCONTROU o arquivo, carrega ele
+            if let errorUrl = Bundle.main.url(forResource: "offline", withExtension: "html") {
                 webView.loadFileURL(errorUrl, allowingReadAccessTo: errorUrl.deletingLastPathComponent())
             } else {
-                // Se NÃO ENCONTROU o arquivo, carrega um HTML de erro diretamente na webview
                 let htmlError = """
                 <!DOCTYPE html>
                 <html>
                 <body style="background-color: #101212; color: #ff0000; font-family: monospace; font-size: 20px; padding: 20px;">
                 <h1>DEBUG</h1>
-                <p>Erro Crítico: O arquivo 'public/offline-test.html' NÃO foi encontrado no bundle do aplicativo.</p>
-                <p>O caminho está incorreto.</p>
+                <p>Erro Crítico: O arquivo 'offline.html' NÃO foi encontrado no bundle do aplicativo.</p>
                 </body>
                 </html>
                 """
