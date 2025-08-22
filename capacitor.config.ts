@@ -7,12 +7,7 @@ const config: CapacitorConfig = {
   appId: 'br.com.inteligenciatitan.app',
   appName: 'titanapp',
   webDir: 'www',
-  server: {
-    url: 'https://inteligenciatitan.com.br',
-    cleartext: true,
-    // O Capacitor vai usar este arquivo automaticamente quando a URL falhar
-    errorPath: 'offline.html' 
-  },
+  // A seção 'server' foi removida
   android: {
     adjustMarginsForEdgeToEdge: 'force'
   },
@@ -26,16 +21,16 @@ const config: CapacitorConfig = {
       backgroundColor: '#000000'
     },
     SplashScreen: {
-      launchShowDuration: 3000,   // Mostra a splash por 3 segundos
-      launchAutoHide: true,      // ESCONDE AUTOMATICAMENTE (MUITO IMPORTANTE)
-      backgroundColor: '#101212', 
+      launchShowDuration: 3000,
+      launchAutoHide: true,
+      backgroundColor: '#101212',
       androidSplashResourceName: 'splash',
       androidScaleType: 'CENTER_CROP',
       showSpinner: false,
       ios: {
         contentMode: "scaleAspectFit"
       },
-      logoSplashScale: 0.4 
+      logoSplashScale: 0.4
     }
   }
 };
