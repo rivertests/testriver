@@ -59,7 +59,7 @@ if let bridgeVC = self.window?.rootViewController as? CAPBridgeViewController {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         let nsError = error as NSError
         if nsError.code == NSURLErrorNotConnectedToInternet || nsError.code == NSURLErrorTimedOut || nsError.code == NSURLErrorCannotConnectToHost {
-            if let errorUrl = Bundle.main.url(forResource: "www/index", withExtension: "html") {
+           if let errorUrl = Bundle.main.url(forResource: "public/offline", withExtension: "html") {
                 webView.loadFileURL(errorUrl, allowingReadAccessTo: errorUrl.deletingLastPathComponent())
             }
         }
