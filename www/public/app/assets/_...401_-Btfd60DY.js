@@ -1,0 +1,1 @@
+import{m as a,b as o}from"./index-DKw2vzPJ.js";import{R as r}from"./rota-erro.component-CN6v0cOL.js";const e={semAutorizacao:"Sem autenticação"},n={semAutorizacao:"Unauthorized"},s={semAutorizacao:"No autorizado"},u=()=>a({"pt-BR":e,"en-US":n,"es-ES":s}),c=()=>{const t=u();return o(r,{get titulo(){return t("semAutorizacao")}})};function p(){return o(c,{})}export{p as default};
