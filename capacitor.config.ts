@@ -1,5 +1,7 @@
 /// <reference types="@capawesome/capacitor-android-edge-to-edge-support" />
 /// <reference types="@capacitor/status-bar" />
+// Configuração final para build no iOS
+
 
 import { CapacitorConfig } from '@capacitor/cli';
 
