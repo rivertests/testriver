@@ -10,7 +10,7 @@ const config: CapacitorConfig = {
   server: {
     url: 'https://inteligenciatitan.com.br',
     cleartext: true,
-    errorPath: 'offline.html' // GARANTE QUE O FALLBACK ESTÁ CONFIGURADO
+    errorPath: 'offline.html'
   },
   android: {
     adjustMarginsForEdgeToEdge: 'force'
@@ -25,12 +25,20 @@ const config: CapacitorConfig = {
       backgroundColor: '#000000'
     },
     SplashScreen: {
-      launchShowDuration: 3000,       // MOSTRA A SPLASH POR 3 SEGUNDOS
-      launchAutoHide: true,          // ESCONDE AUTOMATICAMENTE
-      backgroundColor: '#101212',
+      launchShowDuration: 3000,
+      launchAutoHide: true,
+      backgroundColor: '#101212', // A cor de fundo sólida para a splash
       androidSplashResourceName: 'splash',
       androidScaleType: 'CENTER_CROP',
-      showSpinner: false
+      showSpinner: false,
+      ios: {
+        contentMode: "scaleAspectFit",
+        splashFullScreen: true,
+        splashImmersive: true
+      },
+      // logoSplashScale define o tamanho da sua logo sem fundo. 
+      // 0.4 = 40% da tela. Ajuste se necessário.
+      logoSplashScale: 0.4 
     }
   }
 };
