@@ -1,9 +1,74 @@
+# Xcode
+#
+# gitignore contributors: remember to keep this file syncing with Xcode.gitignore
+#
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Cocoapods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for your project what is best.
+#
+# Pods/
+
+# Carthage
+#
+# Add this line if you are using Carthage
+# https://github.com/Carthage/Carthage
+#
+# Carthage/Build
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+#
+# fastlane/report.xml
+# fastlane/Preview.html
+# fastlane/screenshots/**/*.png
+# fastlane/test_output
+
+# Code Coverage
+#
+# Code coverage files can be excluded from Source Control using the following rules:
+#
+# *.gcno
+# *.gcda
+# *.profdata
+
+# Capacitor
 App/build
 App/Pods
 App/output
-App/App/public
-DerivedData
-xcuserdata
+
+# REMOVA - ESTE É O CULPADO! Sem ele, o código do seu site não é enviado para o GitHub.
+# App/App/public
 
 # Cordova plugins for Capacitor
 capacitor-cordova-ios-plugins
