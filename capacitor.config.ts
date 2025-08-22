@@ -1,3 +1,6 @@
+/// <reference types="@capawesome/capacitor-android-edge-to-edge-support" />
+/// <reference types="@capacitor/status-bar" />
+
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
@@ -5,31 +8,31 @@ const config: CapacitorConfig = {
   appName: 'titanapp',
   webDir: 'www',
   server: {
-    url: 'https://inteligenciatitan.com.br', // seu servidor remoto
-    cleartext: true
-    // REMOVIDO errorPath pois fallback offline será pelo AppDelegate
+    url: 'https://inteligenciatitan.com.br',
+    cleartext: true,
+    errorPath: 'offline.html' // GARANTE QUE O FALLBACK ESTÁ CONFIGURADO
   },
   android: {
-    adjustMarginsForEdgeToEdge: 'force',
+    adjustMarginsForEdgeToEdge: 'force'
   },
   plugins: {
     StatusBar: {
       overlaysWebView: true,
       style: 'LIGHT',
-      backgroundColor: '#000000',
+      backgroundColor: '#000000'
     },
     EdgeToEdge: {
-      backgroundColor: '#000000',
+      backgroundColor: '#000000'
     },
     SplashScreen: {
-      launchShowDuration: 0,
-      launchAutoHide: false,
+      launchShowDuration: 3000,       // MOSTRA A SPLASH POR 3 SEGUNDOS
+      launchAutoHide: true,          // ESCONDE AUTOMATICAMENTE
       backgroundColor: '#101212',
       androidSplashResourceName: 'splash',
       androidScaleType: 'CENTER_CROP',
-      showSpinner: false,
-    },
-  },
+      showSpinner: false
+    }
+  }
 };
 
 export default config;
