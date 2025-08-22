@@ -1,68 +1,59 @@
 import UIKit
 import Capacitor
-import WebKit // Adicionado
+import WebKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, WKNavigationDelegate { // Adicionado WKNavigationDelegate
+class AppDelegate: UIResponder, UIApplicationDelegate, WKNavigationDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         return true
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
+    func applicationWillResignActive(_ application: UIApplication) {}
+    func applicationDidEnterBackground(_ application: UIApplication) {}
+    func applicationWillEnterForeground(_ application: UIApplication) {}
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
-        // Código Adicionado para configurar o delegate
-        // ESTA É A LINHA CORRETA
-if let bridgeVC = self.window?.rootViewController as? CAPBridgeViewController {
-    bridgeVC.bridge?.webView?.navigationDelegate = self
-}
+        if let bridgeVC = self.window?.rootViewController as? CAPBridgeViewController {
+            bridgeVC.bridge?.webView?.navigationDelegate = self
+        }
     }
 
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
+    func applicationWillTerminate(_ application: UIApplication) {}
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        // Called when the app was launched with a url. Feel free to add additional processing here,
-        // but if you want the App API to support tracking app url opens, make sure to keep this call
         return ApplicationDelegateProxy.shared.application(app, open: url, options: options)
     }
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        // Called when the app was launched with an activity, including Universal Links.
-        // Feel free to add additional processing here, but if you want the App API to support
-        // tracking app url opens, make sure to keep this call
         return ApplicationDelegateProxy.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
     }
 
-    // Função Adicionada para lidar com falha de conexão
+    // --- FUNÇÃO MODIFICADA COM LÓGICA DE DEBUG ---
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         let nsError = error as NSError
         if nsError.code == NSURLErrorNotConnectedToInternet || nsError.code == NSURLErrorTimedOut || nsError.code == NSURLErrorCannotConnectToHost {
-           if let errorUrl = Bundle.main.url(forResource: "public/offline-test", withExtension: "html") {
-    webView.loadFileURL(errorUrl, allowingReadAccessTo: errorUrl.deletingLastPathComponent())
-}
+            
+            // Tenta carregar o arquivo de teste
+            if let errorUrl = Bundle.main.url(forResource: "public/offline-test", withExtension: "html") {
+                // Se ENCONTROU o arquivo, carrega ele
+                webView.loadFileURL(errorUrl, allowingReadAccessTo: errorUrl.deletingLastPathComponent())
+            } else {
+                // Se NÃO ENCONTROU o arquivo, carrega um HTML de erro diretamente na webview
+                let htmlError = """
+                <!DOCTYPE html>
+                <html>
+                <body style="background-color: #101212; color: #ff0000; font-family: monospace; font-size: 20px; padding: 20px;">
+                <h1>DEBUG</h1>
+                <p>Erro Crítico: O arquivo 'public/offline-test.html' NÃO foi encontrado no bundle do aplicativo.</p>
+                <p>O caminho está incorreto.</p>
+                </body>
+                </html>
+                """
+                webView.loadHTMLString(htmlError, baseURL: nil)
+            }
         }
     }
-
 }
