@@ -35,4 +35,5 @@ const config: CapacitorConfig = {
   }
 };
 
+//teste
 export default config;
