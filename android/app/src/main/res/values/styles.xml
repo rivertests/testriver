@@ -17,8 +17,6 @@
 
 
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
-        <!-- Força fundo preto -->
-        <item name="android:windowBackground">@android:color/black</item>
         <item name="android:background">@drawable/splash</item>
     </style>
 </resources>
